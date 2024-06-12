@@ -7,3 +7,7 @@ admin
 hyGOfI,:,95
 robert
 ?,59,ERToPp
+
+
+node 설치
+https://seokbong.tistory.com/273
