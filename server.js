@@ -2,6 +2,8 @@ const fs = require('fs');
 const https = require('https');
 const express = require('express');
 const cors = require('cors');
+const nodemailer = require('nodemailer');
+
 
 const app = express();
 app.use(cors());
