@@ -1,54 +1,50 @@
-const fs = require('fs');
-const https = require('https');
 const express = require('express');
-const cors = require('cors');
+const https = require('https');
+const fs = require('fs');
 const nodemailer = require('nodemailer');
 
-
 const app = express();
-app.use(cors());
-app.use(express.json());
 
-const options = {
-    cert: fs.readFileSync('/www/server/panel/plugin/mail_sys/cert/cocomarket.app/fullchain.pem'),
-    key: fs.readFileSync('/www/server/panel/plugin/mail_sys/cert/cocomarket.app/privkey.pem')
-};
-
-const fromEmail = 'robert@cocomarket.app';
-const password = '@1q2w3e4r5T';
-const toEmail = 'mossei@nate.com';
+// Nodemailer transporter setup
 const transporter = nodemailer.createTransport({
     service: 'cocomarket.app',
     auth: {
-        user: fromEmail,
-        pass: password
+        user: 'robert@cocomarket.app',
+        pass: '@1q2w3e4r5T'
     }
 });
 
-app.get('/sendmail', (req, res) => {
-    res.send('Hello from your API!');
+app.get('/', (req, res) => {
+    res.send('Hello, world!');
 });
-app.post('/sendmail', (req, res) => {
-    const { subject, text } = req.body;
 
-    // 이메일 옵션 설정
+// Endpoint to send email
+app.get('/sendmail', (req, res) => {
     const mailOptions = {
-        from: fromEmail,
-        to: toEmail,
-        subject: subject,
-        text: text
+        from: 'robert@cocomarket.app',
+        to: 'mossei@nate.com',
+        subject: 'Test Email',
+        text: 'This is a test email from Node.js using Nodemailer.'
     };
 
-    // 이메일 전송
-    transporter.sendMail(mailOptions, function (error, info) {
+    transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            console.error('이메일 전송 오류:', error);
+            console.error(error);
             res.status(500).send(error);
         } else {
-            console.log('이메일이 성공적으로 전송되었습니다:', info.response);
-            res.send('이메일이 성공적으로 전송되었습니다');
+            console.log('Email sent: ' + info.response);
+            res.send('Email sent successfully');
         }
     });
 });
 
-https.createServer(options, app).listen(443);
+// HTTPS options
+const httpsOptions = {
+    cert: fs.readFileSync('/www/server/panel/plugin/mail_sys/cert/cocomarket.app/fullchain.pem'),
+    key: fs.readFileSync('/www/server/panel/plugin/mail_sys/cert/cocomarket.app/privkey.pem')
+};
+
+// Start server
+https.createServer(httpsOptions, app).listen(443, () => {
+    console.log('Server running on port 443');
+});
