@@ -7,7 +7,7 @@ const app = express();
 
 // Nodemailer transporter setup
 const transporter = nodemailer.createTransport({
-    service: 'cocomarket.app',
+    service: 'mail.cocomarket.app',
     auth: {
         user: 'robert@cocomarket.app',
         pass: '@1q2w3e4r5T'
