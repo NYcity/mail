@@ -15,6 +15,10 @@ const transporter = nodemailer.createTransport({
         pass: password
     }
 });
+app.post('/get', (req, res) => {
+    res.send('Hello World!')
+});
+
 app.post('/sendmail', (req, res) => {
     const { subject, text } = req.body;
 
