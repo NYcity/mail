@@ -43,7 +43,7 @@ app.post('/sendmail', (req, res) => {
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
             console.error('이메일 전송 오류:', error);
-            res.status(500).send('이메일 전송 실패');
+            res.status(500).send(error);
         } else {
             console.log('이메일이 성공적으로 전송되었습니다:', info.response);
             res.send('이메일이 성공적으로 전송되었습니다');
