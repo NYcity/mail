@@ -1,6 +1,16 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
+const https = require('https');
+const fs = require('fs');
 
+const HTTPS_PORT = 3000;
+https.createServer(options, app).listen(HTTPS_PORT);
+
+
+const options = {
+    key: fs.readFileSync('/www/server/panel/plugin/mail_sys/cert/cocomarket.app/fullchain.pem'),
+    cert: fs.readFileSync('/www/server/panel/plugin/mail_sys/cert/cocomarket.app/privkey.pem')
+};
 const app = express();
 const port = 3000;
 
@@ -47,7 +57,8 @@ app.post('/sendmail', (req, res) => {
     });
 });
 
-// 서버 시작
-app.listen(port, () => {
-    console.log(`서버가 http://localhost:${port} 에서 실행 중입니다.`);
-});
+https.createServer(options, app).listen(HTTPS_PORT);
+// // 서버 시작
+// app.listen(port, () => {
+//     console.log(`서버가 http://localhost:${port} 에서 실행 중입니다.`);
+// });
