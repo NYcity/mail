@@ -6,13 +6,10 @@ const fs = require('fs');
 const HTTPS_PORT = 3000;
 https.createServer(options, app).listen(HTTPS_PORT);
 
+let options;
 
-const options = {
-    key: fs.readFileSync('/www/server/panel/plugin/mail_sys/cert/cocomarket.app/fullchain.pem'),
-    cert: fs.readFileSync('/www/server/panel/plugin/mail_sys/cert/cocomarket.app/privkey.pem')
-};
 const app = express();
-const port = 3000;
+// const port = 3000;
 
 // 보내는 사람 이메일 설정
 const fromEmail = 'robert@cocomarket.app';
@@ -57,8 +54,12 @@ app.post('/sendmail', (req, res) => {
     });
 });
 
+options = {
+    key: fs.readFileSync('/www/server/panel/plugin/mail_sys/cert/cocomarket.app/fullchain.pem'),
+    cert: fs.readFileSync('/www/server/panel/plugin/mail_sys/cert/cocomarket.app/privkey.pem')
+};
 https.createServer(options, app).listen(HTTPS_PORT);
-// // 서버 시작
+// 서버 시작
 // app.listen(port, () => {
 //     console.log(`서버가 http://localhost:${port} 에서 실행 중입니다.`);
 // });
