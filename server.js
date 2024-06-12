@@ -1,8 +1,10 @@
 const fs = require('fs');
 const https = require('https');
 const express = require('express');
+const cors = require('cors');
 
 const app = express();
+app.use(cors());
 
 const options = {
     cert: fs.readFileSync('/www/server/panel/plugin/mail_sys/cert/cocomarket.app/fullchain.pem'),
