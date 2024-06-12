@@ -20,7 +20,7 @@ app.use(express.json());
 const transporter = nodemailer.createTransport({
     host: process.env.DOMAIN,
     port: process.env.PORT,
-    secure: false, // use SSL
+    secure: process.env.SECURE, // use SSL
     auth: {
         user: process.env.MAILFROM,
         pass: process.env.MAILFROM_PASSWORD

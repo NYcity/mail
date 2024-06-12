@@ -1,0 +1,9 @@
+hostnamectl set-hostname mail.cocomarket.app
+
+
+https://inguide.in/install-and-configure-mailcow-best-self-hosted-mail-server/
+
+admin
+hyGOfI,:,95
+robert
+?,59,ERToPp
