@@ -1,10 +1,10 @@
 const express = require('express');
-const https = require('https');
-const fs = require('fs');
+// const https = require('https');
+// const fs = require('fs');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 require('dotenv').config();
-
+// npm i express https fs nodemailer cors dotenv
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -50,14 +50,16 @@ app.get('/sendmail', (req, res) => {
         }
     });
 });
-
-// HTTPS options
-const httpsOptions = {
-    cert: fs.readFileSync('/etc/letsencrypt/live/cocomarket.app/fullchain.pem'),
-    key: fs.readFileSync('/etc/letsencrypt/live/cocomarket.app/privkey.pem')
-};
-
-// Start server
-https.createServer(httpsOptions, app).listen(443, () => {
-    console.log('Server running on port 443');
+app.listen(3000, () => {
+    console.log('Server running on port 3000');
 });
+// // HTTPS options
+// const httpsOptions = {
+//     cert: fs.readFileSync('/etc/letsencrypt/live/cocomarket.app/fullchain.pem'),
+//     key: fs.readFileSync('/etc/letsencrypt/live/cocomarket.app/privkey.pem')
+// };
+
+// // Start server
+// https.createServer(httpsOptions, app).listen(443, () => {
+//     console.log('Server running on port 443');
+// });
