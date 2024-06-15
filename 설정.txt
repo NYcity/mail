@@ -11,3 +11,8 @@ robert
 
 node 설치
 https://seokbong.tistory.com/273
+
+
+
+coolify 설정
+https://austingil.com/automatically-deploy-from-git/
